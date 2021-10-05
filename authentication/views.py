@@ -17,7 +17,7 @@ import datetime
 
 # Create your views here.
 def Landing(request):
-    return render(request,'landing.html')
+    return render(request,'page1.html')
 
 def Login(request):
     if request.method == 'POST':
