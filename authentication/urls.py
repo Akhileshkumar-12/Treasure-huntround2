@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     path('',views.Landing, name="landing"),
-    # path('signup',views.signup,name="signup"),
+    path('signup',views.signup,name="signup"),
     path('Login',views.Login,name="Login"),
     path('leadership',views.leadership,name="leadership"),
     # a///////////////////////////////////////////////////////////////////
