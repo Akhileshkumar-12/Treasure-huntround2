@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<body style="background-image: url('static/img/1.jpg');">
+<body>
+    <div id="event-box" style="display:none">{{ob|date:"M d,Y H:m:s"}}</div>
+
+<div class="box" id="questionScreen">
+    <div class="title">
+        Riddles:
+    </div>
+    <div class="header">
+        <!-- <div class="scoreBox inl-box">Score: <span id="score" class="score">0</span></div> -->
+        <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div>
+    </div>
     <div id="box">
         <div id="inner-box">
         <div id="inner-box1">
@@ -41,5 +51,41 @@
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static '/css/page1.css' %}">
+        <script>
+    
+
+            const eventBox=document.getElementById('event-box')
+            const CountDownBox=document.getElementById('countdown-box')
+            // console.log(eventBox.textContent)
+            const Eventdate=Date.parse(eventBox.textContent)
+            // console.log(Eventdate)
+            setInterval(()=>{
+                const now=new Date().getTime()
+                // console.log(now)
+                const diff=Eventdate-now
+                // console.log(diff)
+                const d=Math.floor(Eventdate/(1000*60*60*24)-(now/(1000*60*60*24)))
+                const h=Math.floor((Eventdate/(1000*60*60)-(now/(1000*60*60)))%24)
+                const m=Math.floor((Eventdate/(1000*60)-(now/(1000*60)))%60)
+                const s=Math.floor((Eventdate/(1000)-(now/(1000)))%60)
+                if(diff>0)
+                {
+                    CountDownBox.innerHTML=d+":"+h+":"+m+":"+s
+                }
+                else
+                {
+                    CountDownBox.innerHTML="00:00"
+                    document.getElementById("show").style.display = "none";
+                    document.getElementById("show1").style.display = "none";
+                    console.log("aman")
+                }
+            },1000)
+            
+            // function timeOut(){
+            //     if((`${minutes}` == 0 ) && (`${seconds}` == 0)){
+            //         location.href = "end.html";
+            //     }
+            // }
+            </script>
 </body>
 {% endblock %}

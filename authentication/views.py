@@ -158,12 +158,12 @@ def quiz(request):
     # print(name)
     user=request.user
     p=Profile.objects.get(name=user)
-    # k=p.is_verified
+    k=p.is_verified
     # if k==True:
     #     return render(request,'finish.html')
     # p.is_verified=True
-    # #p.name=user
-    # p.save()
+    #p.name=user
+    p.save()
     problems=ImgProblem.objects.all()
     paginator=Paginator(problems,1)
     page_number=request.GET.get('page')
@@ -206,7 +206,6 @@ def score(request,pk):
         op1=request.POST.get('answer')
         print('selcted an',op1)
         problems=ImgProblem.objects.all()
-        op1=int(op1)
         count=0
         user=request.user
         m=ImgProblemSubmission()
@@ -220,7 +219,7 @@ def score(request,pk):
             l=l+1
             if count==l:
                 m.question=i
-                verify=McqSubmissions.objects.filter(user=p,question=i)
+                verify=ImgProblemSubmission.objects.filter(user=p,question=i)
                 if verify:
                     return render(request,'finish.html')
                 m.submitted_output=op1 
@@ -272,16 +271,37 @@ def finish(request):
 
 @login_required(login_url='/Login')
 def problem1(request):
+    ob=Event.objects.all()
+    today=datetime.datetime.now()
+    print(today)
+    # obj1=Event()
+    # for i in ob:
+    #     obj1=i
+    #     break
+    # print(obj1)
+    for i in ob:
+        today=i.When
+        break
+    user=request.user
+    p=Profile.objects.get(name=user)
+    k=p.is_verified
+    if k==True:
+        return render(request,'finish.html')
+    p.is_verified=True
+    #p.name=user
+    p.save()
+    print(today)
     if request.method=='POST':
         res=request.POST.get('answer')
         m=Problem1()
-        user=request.user
-        p=Profile.objects.get(name=user)
+       # p=Profile.objects.get(name=user)
         m.user=p
         m.output1=res
         m.save()
-        return render(request,'page3.html')
-    return render(request,'page1.html')
+        
+        return render(request,'page3.html',{'ob':today})
+    
+    return render(request,'page1.html',{'ob':today})
 
 def problem2(request):
     if request.method=='POST':
@@ -298,6 +318,19 @@ def problem2(request):
             m.user=p
             m.output1=res
             m.save()
-        quiz(request)
-        return render(request,'page3.html')
-    return render(request,'page3.html')
+        return quiz(request)
+        #return render(request,'page3.html')
+    ob=Event.objects.all()
+    today=datetime.datetime.now()
+    print(today)
+    # obj1=Event()
+    # for i in ob:
+    #     obj1=i
+    #     break
+    # print(obj1)
+    for i in ob:
+        today=i.When
+        break
+    print("aman")
+    print(today)
+    return render(request,'page3.html',{'ob':today})
