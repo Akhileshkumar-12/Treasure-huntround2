@@ -17,19 +17,20 @@
                 <div class="inner-box2"><p class="text">string</p></div>
 
             </div>
-            <form action="#">
+            <form action="{% url 'problem2' %}" method="POST">
+                {% csrf_token %}
                 <div class="input">
                     <label for="answer">Answer:</label>
                     <input type="text" id="answer" name="answer" placeholder="Enter your Answer here"><br>
                 </div>
                 <div class="buttons">
-                    <button class="but">Submit</button>
-                    <button class="but">Next</button>
-                    <button class="but">Finish</button>
+                    <button  type="submit" class="but">Submit</button>
                 </div>
+                
             </form>
         </div>
-
+        <a class="but" href="{% url 'quiz' %}">Next</a>
+        <button class="but">Finish</button>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"

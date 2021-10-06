@@ -17,7 +17,7 @@ import datetime
 
 # Create your views here.
 def Landing(request):
-    return render(request,'page3.html')
+    return render(request,'landing.html')
 
 def Login(request):
     if request.method == 'POST':
@@ -156,16 +156,18 @@ def quiz(request):
     # print(name)
     user=request.user
     p=Profile.objects.get(name=user)
-    k=p.is_verified
-    if k==True:
-        return render(request,'finish.html')
-    p.is_verified=True
-    #p.name=user
-    p.save()
-    problems=McqProblems.objects.all()
+    # k=p.is_verified
+    # if k==True:
+    #     return render(request,'finish.html')
+    # p.is_verified=True
+    # #p.name=user
+    # p.save()
+    problems=ImgProblem.objects.all()
     paginator=Paginator(problems,1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
+    for i in page_obj:
+        print(i.text)
     print(page_number)
     print(page_obj)
     ob=Event.objects.all()
@@ -185,7 +187,9 @@ def quiz(request):
     # for i in problems:
     #     list.append(i)
     # print(list)
-    return render(request,'quizpage.html',{'page_obj':page_obj,'page_number':page_number,'ob':today})
+    print('akash')
+    #print(user.username)
+    return render(request,'page2.html',{'page_obj':page_obj,'page_number':page_number,'ob':today})
 
 @login_required(login_url='/Login')
 def Logout(request):
@@ -197,13 +201,13 @@ def score(request,pk):
     #print('aman')
     if request.method=='POST':
 
-        op1=request.POST['1']
+        op1=request.POST.get('answer')
         print('selcted an',op1)
-        problems=McqProblems.objects.all()
+        problems=ImgProblem.objects.all()
         op1=int(op1)
         count=0
         user=request.user
-        m=McqSubmissions()
+        m=ImgProblemSubmission()
         p=Profile.objects.get(name=user)
         if(pk=='None'):
             count=1
@@ -218,12 +222,7 @@ def score(request,pk):
                 if verify:
                     return render(request,'finish.html')
                 m.submitted_output=op1 
-                if op1==i.correct_ans :
-                    m.result=True
-                    d=p.score
-                    p.score=d+1
-                else:
-                    m.result=False
+                 
         p.save()
         m.user=p
         m.save()
@@ -233,7 +232,7 @@ def score(request,pk):
     else:
         pk=int(pk)+1
         pk=str(pk)
-    problems=McqProblems.objects.all()
+    problems=ImgProblem.objects.all()
     paginator=Paginator(problems,1)
     l=problems.__len__()
     # print(l)
@@ -264,7 +263,39 @@ def score(request,pk):
     # for i in problems:
     #     list.append(i)
     # print(list)
-    return render(request,'quizpage.html',{'page_obj':page_obj,'page_number':pk,'ob':today})
+    return render(request,'page2.html',{'page_obj':page_obj,'page_number':pk,'ob':today})
 
 def finish(request):
     return render(request,'finish.html')
+
+@login_required(login_url='/Login')
+def problem1(request):
+    if request.method=='POST':
+        res=request.POST.get('answer')
+        m=Problem1()
+        user=request.user
+        p=Profile.objects.get(name=user)
+        m.user=p
+        m.output1=res
+        m.save()
+        return render(request,'page3.html')
+    return render(request,'page1.html')
+
+def problem2(request):
+    if request.method=='POST':
+        res=request.POST.get('answer')
+        m=Problem1()
+        user=request.user
+        
+        p=Profile.objects.get(name=user)
+        k=Problem1(user=p)
+        if k:
+            k.output2=res
+            k.save()
+        else:
+            m.user=p
+            m.output1=res
+            m.save()
+        quiz(request)
+        return render(request,'page3.html')
+    return render(request,'page3.html')

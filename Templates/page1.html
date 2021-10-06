@@ -19,17 +19,20 @@
             <div class="inner-box3"></div>
         </div>
     </div>
-       <form action="#">
+       <form action="{% url 'problem1' %}" method="POST">
+           {% csrf_token %}
            <div class="input">
            <label for="answer">Answer:</label>
             <input type="text" id="answer" name="answer" placeholder="Enter your Answer here"><br>
         </div>
         <div class="buttons">
-            <button class="but">Submit</button>
-            <button class="but">Next</button>
-            <button class="but">Finish</button>
+            <button type="submit" class="but">Submit</button>
+            
         </div>
+        
        </form>
+       <a   class="but" href="{% url 'problem2' %}">Next</a>
+        <button class="but">Finish</button>
     </div>
 
 

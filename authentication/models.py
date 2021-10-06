@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db.models.expressions import When
+from django.db.models.fields.files import ImageField
 from django.utils import timezone
 
 
@@ -16,6 +17,7 @@ class Profile(models.Model):
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     score=models.IntegerField(default=0)
+    end_time=models.DateField(auto_now_add=True)
     def __str__(self):
         return str(self.name)
 class McqProblems(models.Model):
@@ -53,3 +55,16 @@ class Contests(models.Model):
     
 class Event(models.Model):
     When=models.DateTimeField()
+
+class ImgProblem(models.Model):
+    text=models.CharField(max_length=20000)
+    Img=models.ImageField()
+
+class ImgProblemSubmission(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    question = models.ForeignKey(ImgProblem, on_delete=models.CASCADE)
+    submitted_output = models.CharField(max_length=2000)
+class Problem1(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    output1=models.CharField(max_length=20000)
+    output2=models.CharField(max_length=20000)

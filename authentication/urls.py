@@ -17,4 +17,6 @@ urlpatterns = [
     path('logout', views.Logout, name='logout'),
     path('score/<slug:pk>/',views.score,name='score'),
     path('finish', views.finish, name='finish'),
+    path('problem1', views.problem1, name='problem1'),
+    path('problem2', views.problem2, name='problem2'),
 ]
