@@ -150,6 +150,8 @@ def leadership(request):
     for i in p:
         print(i.name.username)
     return render(request,'leaderboard.html',{'list':p,'myrank':myrank,'myscore':myscore})
+
+
 @login_required(login_url='/Login')
 def quiz(request):
     # name=request.user.username

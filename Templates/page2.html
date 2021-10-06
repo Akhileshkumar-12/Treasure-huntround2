@@ -12,7 +12,7 @@
             <p>Question : {{i.text}}?</p>
         </div>
         <div id="inner-box">
-            <img class=" image " src="{{i.Img}}" alt="">
+            <img class=" image " src="{{ i.Img.url }}" alt="">
         </div>
         <form action="{% url 'score' pk=page_number%}" method="POST">
             {% csrf_token %}
