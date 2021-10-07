@@ -42,7 +42,7 @@ def Login(request):
             return redirect('/Login')
         
         login(request , user)
-        return redirect('/quiz')
+        return redirect('/problem1')
 
     return render(request , 'login.html')
     # return render(request,'Login.html')

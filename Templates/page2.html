@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<body style="background-image: url('static/img/1.jpg');">
+<body >
     <div id="event-box" style="display:none">{{ob|date:"M d,Y H:m:s"}}</div>
 
     <div class="box" id="questionScreen">
@@ -11,10 +11,11 @@
         </div>
         <div class="header">
             <!-- <div class="scoreBox inl-box">Score: <span id="score" class="score">0</span></div> -->
-            <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div>
+            <!-- <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div> -->
         </div> 
+        <div id="countdown" class="ul-rigth inl-box" style="text-align: center; color: blue; font-size: 2rem;"> Time Off <span id="countdown-box" class="time"></span></div>
     <div id="box">
-      
+        
         {% for i in page_obj %}
 
         <div class="textbox">
@@ -30,12 +31,12 @@
                 <input type="text" id="answer" name="answer" placeholder="Enter your Answer here"><br>
             </div>
             <div class="buttons">
-                <button type="submit" class="but">Submit</button>
+                <button type="submit" id="show" class="but">Submit</button>
             </div>
         </form>
         {% endfor %}
         {% if page_obj.has_next %}
-        <a class="but" href="{% url 'score' pk=page_number %}">Next</a>
+        <a class="but" id="show1" href="{% url 'score' pk=page_number %}">Next</a>
         {% endif %}
         <button class="but">Finish</button>
     </div>

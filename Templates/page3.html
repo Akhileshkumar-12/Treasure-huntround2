@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<body style="background-image: url('static/img/1.jpg');">
+<body >
     <div id="event-box" style="display:none">{{ob|date:"M d,Y H:m:s"}}</div>
 
     <div class="box" id="questionScreen">
@@ -11,10 +11,10 @@
         </div>
         <div class="header">
             <!-- <div class="scoreBox inl-box">Score: <span id="score" class="score">0</span></div> -->
-            <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div>
+            <!-- <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div> -->
         </div> 
     <div id="box">
-      
+        <div id="countdown" class="ul-rigth inl-box" style="text-align: center; color: blue; font-size: 2rem;"> Time Off <span id="countdown-box" class="time"></span></div>
     <div id="box">
         <div id="inner-box">
             <div class="textbox">
@@ -36,12 +36,12 @@
                     <input type="text" id="answer" name="answer" placeholder="Enter your Answer here"><br>
                 </div>
                 <div class="buttons">
-                    <button  type="submit" class="but">Submit</button>
+                    <button  type="submit" id="show1" class="but">Submit</button>
                 </div>
                 
             </form>
         </div>
-        <a class="but" href="{% url 'quiz' %}">Next</a>
+        <a class="but" href="{% url 'quiz' %}" id="show">Next</a>
         <button class="but">Finish</button>
 
 

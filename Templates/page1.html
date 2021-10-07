@@ -5,28 +5,32 @@
     <div id="event-box" style="display:none">{{ob|date:"M d,Y H:m:s"}}</div>
 
 <div class="box" id="questionScreen">
-    <div class="title">
+    <div class="title" style="text-align: center;font-size: 2rem;">
         Riddles:
     </div>
     <div class="header">
         <!-- <div class="scoreBox inl-box">Score: <span id="score" class="score">0</span></div> -->
-        <div id="countdown" class="ul-rigth inl-box"> Time Off <span id="countdown-box" class="time"></span></div>
+        
     </div>
+    <div id="countdown" class="ul-rigth inl-box" style="text-align: center; color: blue; font-size: 2rem;"> Time Off <span id="countdown-box" class="time"></span></div>
     <div id="box">
+        <div style="text-align: center; font-size: 2rem; font-weight: bold; color: crimson;">
+          I forgot my name🥺🥺can u remind ?????
+        </div>
         <div id="inner-box">
         <div id="inner-box1">
-            <div class="inner-box1"></div>
-            <div class="inner-box1"></div>
-            <div class="inner-box1"></div>
+            <div class="inner-box1" style="background-color: darkblue;"></div>
+            <div class="inner-box1" style="background-color: gray;"></div>
+            <div class="inner-box1" style="background-color: whitesmoke;"></div>
         </div>
         <div id="inner-box2">
-            <div class="inner-box2"></div>
-            <div class="inner-box2"></div>
-            <div class="inner-box2"></div>
+            <div class="inner-box2" style="background-color:red;"></div>
+            <div class="inner-box2" style="background-color:yellowgreen;"></div>
+            <div class="inner-box2" style="background-color:green;"></div>
         </div><div id="inner-box3">
-            <div class="inner-box3"><span class="span">I am Mr.Nobody</span></div>
-            <div class="inner-box3"></div>
-            <div class="inner-box3"></div>
+            <div class="inner-box3"><span class="span">I am the Boss</span></div>
+            <div class="inner-box3" style="background-color:olivedrab;"></div>
+            <div class="inner-box3"style="background-color:orange;"></div>
         </div>
     </div>
        <form action="{% url 'problem1' %}" method="POST">
@@ -36,12 +40,12 @@
             <input type="text" id="answer" name="answer" placeholder="Enter your Answer here"><br>
         </div>
         <div class="buttons">
-            <button type="submit" class="but">Submit</button>
+            <button type="submit"id="show1" class="but">Submit</button>
             
         </div>
         
        </form>
-       <a   class="but" href="{% url 'problem2' %}">Next</a>
+       <a   class="but" id="show" href="{% url 'problem2' %}">Next</a>
         <button class="but">Finish</button>
     </div>
 
